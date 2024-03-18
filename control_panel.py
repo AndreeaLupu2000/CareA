@@ -5,7 +5,6 @@ import subprocess
 GPIO.setmode(GPIO.BCM)
 BUTTON_PIN = 18
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
 process = None
 
 
@@ -13,7 +12,7 @@ def button_pressed_callback(channel):
     global process
     if process is None:
         # Start the script
-        process = subprocess.Popen(["/home/andreea/Documents/Master/WS23-24/TMS/CareCompass/sts.py"])
+        process = subprocess.Popen(["/home/andreea/Documents/Master/WS23-24/TMS/CareA/sts.py"])
     else:
         # Stop the script
         process.terminate()  # or process.kill() if terminate doesn't work

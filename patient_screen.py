@@ -25,7 +25,7 @@ class FullScreenTextDisplay:
         self.label.pack(expand=True)
 
         # Placeholder text, can be updated with any string
-        self.update_text("Hello, speak something!")
+        self.update_text("Hello! :)")
 
     def update_text(self, text):
         self.label.config(text=text)
