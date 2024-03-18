@@ -223,32 +223,32 @@ def text_to_speech(text, credentials):
 def main_sts():
     display = FullScreenTextDisplay()
 
-    # while True:
-    with MicrophoneStream(SAMPLE_RATE, CHUNK_SIZE, RECORD_SECONDS) as stream:
-        audio_generator = stream.generator()
-        audio_requests = (speech.StreamingRecognizeRequest(audio_content=content)
-                          for content in audio_generator)
+    while True:
+        with MicrophoneStream(SAMPLE_RATE, CHUNK_SIZE, RECORD_SECONDS) as stream:
+            audio_generator = stream.generator()
+            audio_requests = (speech.StreamingRecognizeRequest(audio_content=content)
+                              for content in audio_generator)
 
-        config = speech.RecognitionConfig(
-            encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-            sample_rate_hertz=SAMPLE_RATE,
-            language_code='en-US'
-        )
-        streaming_config = speech.StreamingRecognitionConfig(config=config, interim_results=True)
+            config = speech.RecognitionConfig(
+                encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+                sample_rate_hertz=SAMPLE_RATE,
+                language_code='en-US'
+            )
+            streaming_config = speech.StreamingRecognitionConfig(config=config, interim_results=True)
 
-        responses = client.streaming_recognize(streaming_config, audio_requests)
+            responses = client.streaming_recognize(streaming_config, audio_requests)
 
-        final_transcript = listen_print_loop(responses, display)
-        print("Final Transcript:")
-        print(final_transcript)
-        response_txt = query_chatgpt(final_transcript, display)
-        print(response_txt)
+            final_transcript = listen_print_loop(responses, display)
+            print("Final Transcript:")
+            print(final_transcript)
+            response_txt = query_chatgpt(final_transcript, display)
+            print(response_txt)
 
-        # Speak out the ChatGPT response
-        if response_txt:
-            text_to_speech(response_txt, credentials)
+            # Speak out the ChatGPT response
+            if response_txt:
+                text_to_speech(response_txt, credentials)
 
-        time.sleep(3)
+            time.sleep(3)
 
 
 if __name__ == '__main__':
