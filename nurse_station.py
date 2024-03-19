@@ -26,8 +26,6 @@ def button_press(number):
     print(f"Button {number} pressed")
 
 
-# hello on the other side (Adele)
-# Create 50 buttons
 buttons = {}
 for i in range(1, 51):
     row = (i - 1) // 10

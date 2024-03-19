@@ -11,15 +11,18 @@ from pydub.playback import play
 import tkinter as tk
 from tkinter import font as tkfont
 import threading
-from patient_screen import FullScreenTextDisplay
+from patient_screen import shared_display
 
 # Audio recording parameters
 SAMPLE_RATE = 16000
 CHUNK_SIZE = int(SAMPLE_RATE / 10)  # 100ms
 RECORD_SECONDS = 5  # Record for 5 seconds
 
+
+# Windows Andreea: C:\\Users\\40732\\Downloads\\
+# Ubuntu Andreea: /home/andreea/Downloads/
 credentials = service_account.Credentials.from_service_account_file(
-    '/home/andreea/Downloads/tribal-marker-417122-f025dc88eca1.json'
+    'C:\\Users\\40732\\Downloads\\tribal-marker-417122-f025dc88eca1.json'
 )
 
 client = speech.SpeechClient(credentials=credentials)
@@ -93,25 +96,6 @@ class MicrophoneStream:
             yield b''.join(data)
 
 
-def display_text(text):
-    # Create a full-screen window
-    root = tk.Tk()
-    root.attributes('-fullscreen', True)
-
-    # Set the font size to a large value for full-screen display
-    custom_font = tkfont.Font(size=50)
-
-    # Use a label to display the text, ensure it's centered and the font is large
-    label = tk.Label(root, text=text, font=custom_font, wraplength=root.winfo_screenwidth(), justify="center")
-    label.pack(expand=True)
-
-    # Update the GUI in a separate thread to prevent blocking
-    def update_gui():
-        root.mainloop()
-
-    threading.Thread(target=update_gui).start()
-
-
 def listen_print_loop(responses, display):
     full_transcript = ""
     for response in responses:
@@ -132,7 +116,9 @@ def listen_print_loop(responses, display):
 
 
 def query_chatgpt(prompt, display, conversation_historic):
-    with open('/home/andreea/Documents/Master/WS23-24/TMS/OpenAPI/api_key.txt', 'r') as file:
+    # Windows Andreea: C:\\Users\\40732\\Desktop\\Education\\Master\\WS 23-24\\Think Make Start\\OpenAI\\
+    # Ubuntu Andreea: /home/andreea/Documents/Master/WS23-24/TMS/OpenAPI/
+    with open('C:\\Users\\40732\\Desktop\\Education\\Master\\WS 23-24\\Think Make Start\\OpenAI\\api_key.txt', 'r') as file:
         api_key = file.read().strip()
         print(api_key)
 
@@ -224,7 +210,7 @@ def text_to_speech(text, credentials):
 
 
 def main_sts():
-    display = FullScreenTextDisplay()
+    display = shared_display
     conversation_historic = ""
 
     while True:
@@ -251,7 +237,6 @@ def main_sts():
             if response_txt:
                 text_to_speech(response_txt, credentials)
 
-            time.sleep(1)
 
 
 if __name__ == '__main__':
