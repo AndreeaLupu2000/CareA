@@ -9,24 +9,35 @@ button = Button(2)
 # Define a global process variable to manage the subprocess
 process = None
 
+
+def start_process():
+    global process
+    print("Start the nurse_station.py...")
+    process = subprocess.Popen(["python", "nurse_station.py"])
+
+
+def stop_process():
+    global process
+    print("Stop the nurse_station.py...")
+    if process is not None:
+        process.terminate()
+        process = None
+
+
 def run_patient_screen():
     # This function will run the patient_screen.py continuously.
     subprocess.run(["python3", "patient_screen.py"])
 
+
 def manage_sts_script():
     global process
-    while True:
-        button.wait_for_press()
-        if process is None:
-            # Start sts.py if it's not already running
-            print("Starting sts.py...")
-            process = subprocess.Popen(["python3", "sts.py"])
-        else:
-            # Stop sts.py if it's currently running
-            print("Stopping sts.py...")
-            process.terminate()
-            process = None
-        sleep(1)  # Debounce delay
+
+    button.wait_for_press()
+    start_process()
+    sleep(1)  # Debounce delay
+
+    button.wait_for_press()
+    stop_process()
 
 # Thread for running the patient_screen.py script
 t1 = threading.Thread(target=run_patient_screen)
