@@ -1,27 +1,30 @@
-import RPi.GPIO as GPIO
+from gpiozero import Button
 import subprocess
+from time import sleep
 
-# Set up GPIO using BCM numbering
-GPIO.setmode(GPIO.BCM)
-BUTTON_PIN = 18
-GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+button = Button(2)
+
 process = None
 
 
-def button_pressed_callback(channel):
+def start_process():
     global process
-    if process is None:
-        # Start the script
-        process = subprocess.Popen(["/home/andreea/Documents/Master/WS23-24/TMS/CareA/sts.py"])
-    else:
-        # Stop the script
-        process.terminate()  # or process.kill() if terminate doesn't work
+    print("Start the nurse_station.py...")
+    process = subprocess.Popen(["python", "nurse_station.py"])
+
+
+def stop_process():
+    global process
+    print("Stop the nurse_station.py...")
+    if process is not None:
+        process.terminate()
         process = None
 
 
-GPIO.add_event_detect(BUTTON_PIN, GPIO.FALLING, callback=button_pressed_callback, bouncetime=200)
+button.wait_for_press()
+start_process()
 
-try:
-    input("Press enter to quit\n\n")
-finally:
-    GPIO.cleanup()
+sleep(2)
+
+button.wait_for_press()
+stop_process()

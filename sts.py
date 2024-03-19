@@ -131,10 +131,12 @@ def listen_print_loop(responses, display):
     return full_transcript.strip()
 
 
-def query_chatgpt(prompt, display):
+def query_chatgpt(prompt, display, conversation_historic):
     with open('/home/andreea/Documents/Master/WS23-24/TMS/OpenAPI/api_key.txt', 'r') as file:
         api_key = file.read().strip()
         print(api_key)
+
+    conversation_historic += f"\nUser: {prompt}"
 
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -178,11 +180,12 @@ def query_chatgpt(prompt, display):
 
     if response.status_code == 200:
         response_text = response.json()["choices"][0]["message"]["content"]
+        conversation_historic += f"\nAI: {response_text}"
         display.update_text(response_text)
-        return response_text
+        return response_text, conversation_historic
     else:
         print(f"Failed to fetch response: {response.status_code}, {response.text}")
-        return None
+        return None, None
 
 
 def text_to_speech(text, credentials):
@@ -222,6 +225,7 @@ def text_to_speech(text, credentials):
 
 def main_sts():
     display = FullScreenTextDisplay()
+    conversation_historic = ""
 
     while True:
         with MicrophoneStream(SAMPLE_RATE, CHUNK_SIZE, RECORD_SECONDS) as stream:
@@ -241,14 +245,13 @@ def main_sts():
             final_transcript = listen_print_loop(responses, display)
             print("Final Transcript:")
             print(final_transcript)
-            response_txt = query_chatgpt(final_transcript, display)
+            response_txt, conversation_historic = query_chatgpt(final_transcript, display, conversation_historic)
             print(response_txt)
 
-            # Speak out the ChatGPT response
             if response_txt:
                 text_to_speech(response_txt, credentials)
 
-            time.sleep(3)
+            time.sleep(1)
 
 
 if __name__ == '__main__':
