@@ -146,7 +146,7 @@ def query_chatgpt(prompt, display, conversation_historic):
               "early days as a devoted doctor, I am now retired. Presently, I am battling leukemia. Four days ago, " \
               "I underwent surgery and am now in the recovery phase, resting in the hospital bed. "
 
-    adjusted_prompt = f"{context}\n{prompt}"
+    adjusted_prompt = f"{context}{conversation_historic}"
 
     data = {
         "model": "gpt-3.5-turbo",
