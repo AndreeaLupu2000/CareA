@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nursing Station</title>
+    <style>
+        .button {
+            width: 100px;
+            height: 50px;
+            background-color: gray;
+            color: white;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .button.clicked {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nursing Station</h1>
+    <div>
+        <button class="button" onclick="toggleColor(this)">Patient 1</button>
+        <button class="button" onclick="toggleColor(this)">Patient 2</button>
+        <button class="button" onclick="toggleColor(this)">Patient 3</button>
+        <button class="button" onclick="toggleColor(this)">Patient 4</button>
+        <button class="button" onclick="toggleColor(this)">Patient 5</button>
+    </div>
+
+    <div>
+        <button class="button" onclick="toggleColor(this)">Patient 6</button>
+        <button class="button" onclick="toggleColor(this)">Patient 7</button>
+        <button class="button" onclick="toggleColor(this)">Patient 8</button>
+        <button class="button" onclick="toggleColor(this)">Patient 9</button>
+        <button class="button" onclick="toggleColor(this)">Patient 10</button>
+    </div>
+
+    <div>
+        <button class="button" onclick="toggleColor(this)">Patient 11</button>
+        <button class="button" onclick="toggleColor(this)">Patient 12</button>
+        <button class="button" onclick="toggleColor(this)">Patient 13</button>
+        <button class="button" onclick="toggleColor(this)">Patient 14</button>
+        <button class="button" onclick="toggleColor(this)">Patient 15</button>
+    </div>
+
+    <div>
+        <button class="button" onclick="toggleColor(this)">Patient 16</button>
+        <button class="button" onclick="toggleColor(this)">Patient 17</button>
+        <button class="button" onclick="toggleColor(this)">Patient 18</button>
+        <button class="button" onclick="toggleColor(this)">Patient 19</button>
+        <button class="button" onclick="toggleColor(this)">Patient 20</button>
+    </div>
+
+    <div>
+        <button class="button" onclick="toggleColor(this)">Patient 21</button>
+        <button class="button" onclick="toggleColor(this)">Patient 22</button>
+        <button class="button" onclick="toggleColor(this)">Patient 23</button>
+        <button class="button" onclick="toggleColor(this)">Patient 24</button>
+        <button class="button" onclick="toggleColor(this)">Patient 25</button>
+    </div>
+
+    <div>
+        <button class="button" onclick="toggleColor(this)">Patient 26</button>
+        <button class="button" onclick="toggleColor(this)">Patient 27</button>
+        <button class="button" onclick="toggleColor(this)">Patient 28</button>
+        <button class="button" onclick="toggleColor(this)">Patient 29</button>
+        <button class="button" onclick="toggleColor(this)">Patient 30</button>
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        function toggleColor(button) {
+        button.classList.toggle('clicked');
+    }</script>
+
+    <script>
+        var socket = io.connect('http://192.168.0.120:5000');
+
+        socket.on('connect', function() {
+        console.log('Websocket connected!');
+    });
+
+        socket.on('button_press', function() {
+        console.log('Button press received:');
+    });
+    </script>
+
+   </body>
+</html>
