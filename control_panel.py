@@ -4,53 +4,101 @@ from gpiozero import Button
 from time import sleep
 
 # Initialize the button
-button = Button(27)
+pain_button = Button(27)
+drink_button = Button(17)
+chat_button = Button(2)
+schedule_button = Button(3)
+orientation_button = Button(4)
 
 # Define a global process variable to manage the subprocess
-process = None
+pain_process = None
+drink_process = None
+chat_process = None
+schedule_process = None
+orientation_process = None
 
 
-def start_process():
-    global process
-    print("Start the sts.py...")
-    process = subprocess.Popen(["python", "sts.py"])
+def start_pain():
+    global pain_process
+    print("Start the pain.py...")
+    pain_process = subprocess.Popen(["python", "pain.py"])
+    sleep(2)
+
+    pain_button.wait_for_press()
+    pain_process.terminate()
 
 
-def stop_process():
-    global process
-    print("Stop the sts.py...")
-    if process is not None:
-        process.terminate()
-        process = None
+def start_drink():
+    global drink_process
+    print("Start the drink.py...")
+    drink_process = subprocess.Popen(["python", "drink.py"])
+    sleep(2)
+
+    drink_button.wait_for_press()
+    drink_process.terminate()
+
+
+def start_chat():
+    global chat_process
+    print("Start the chat.py...")
+    chat_process = subprocess.Popen(["python", "chat.py"])
+    sleep(2)
+
+    chat_button.wait_for_press()
+    chat_process.terminate()
+
+
+def start_schedule():
+    global schedule_process
+    print("Start the schedule.py...")
+    schedule_process = subprocess.Popen(["python", "schedule.py"])
+    sleep(2)
+
+    schedule_button.wait_for_press()
+    schedule_process.terminate()
+
+
+def start_orientation():
+    global orientation_process
+    print("Start the orientation.py...")
+    orientation_process = subprocess.Popen(["python", "orientation.py"])
+    sleep(2)
+
+    orientation_button.wait_for_press()
+    orientation_process.terminate()
 
 
 def run_patient_screen():
-    # This function will run the patient_screen.py continuously.
     subprocess.run(["python3", "patient_screen.py"])
 
 
+def run_nurse_station():
+    subprocess.run(["python3", "ns-backend.py"])
+
+
 def manage_sts_script():
-    global process
-
-    button.wait_for_press()
-    start_process()
-    sleep(1)  # Debounce delay
-
-    button.wait_for_press()
-    stop_process()
+    while True:
+        if pain_button.is_active:
+            start_pain()
+        elif drink_button.is_active:
+            start_drink()
+        elif chat_button.is_active:
+            start_chat()
+        elif schedule_button.is_active:
+            start_schedule()
+        elif orientation_button.is_active:
+            start_orientation()
 
 
 # Thread for running the patient_screen.py script
 t1 = threading.Thread(target=run_patient_screen)
-
-# Thread for managing the sts.py script
-t2 = threading.Thread(target=manage_sts_script)
+t2 = threading.Thread(target=run_nurse_station)
+t3 = threading.Thread(target=manage_sts_script)
 
 # Start the patient_screen.py script thread
 t1.start()
-
-# Start the sts.py management thread
 t2.start()
+t3.start()
 
 # These joins aren't strictly necessary unless you have a reason to wait for the threads to finish
 # which generally isn't the case for daemon-like threads that are meant to run until the main program exits.
