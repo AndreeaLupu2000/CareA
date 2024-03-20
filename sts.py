@@ -238,6 +238,5 @@ def main_sts():
                 text_to_speech(response_txt, credentials)
 
 
-
 if __name__ == '__main__':
     main_sts()
