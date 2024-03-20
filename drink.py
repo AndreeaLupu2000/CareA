@@ -141,6 +141,8 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " designed to assist patients by providing necessary information"
                                         " focusing on what is a person recommended to drink into a hospital."
                                         " The answers should be really short and concrete."
+                                        " When a person says that is turst or that he/she would like to drink something,"
+                                        " your response should consistently be: 'I will call a nurse to bring your drink.'"
                                         " When a patient inquires about what should he drink, your response"
                                         " should consistently be: 'People usually drink water, herbal teas,"
                                         " juices, and sometimes broth. These are chosen to keep patients "
