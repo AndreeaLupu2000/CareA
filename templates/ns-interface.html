@@ -20,7 +20,7 @@
 <body>
     <h1>Nursing Station</h1>
     <div>
-        <button class="button" onclick="toggleColor(this)">Patient 1</button>
+        <button name="button1" class="button" onclick="toggleColor(this)">Patient 1</button>
         <button class="button" onclick="toggleColor(this)">Patient 2</button>
         <button class="button" onclick="toggleColor(this)">Patient 3</button>
         <button class="button" onclick="toggleColor(this)">Patient 4</button>
@@ -74,14 +74,16 @@
     }</script>
 
     <script>
-        var socket = io.connect('http://192.168.0.120:5000');
+        var socket = io.connect('http://127.0.0.1:5000');
 
         socket.on('connect', function() {
         console.log('Websocket connected!');
     });
 
-        socket.on('button_press', function() {
+        socket.on('press', function() {
         console.log('Button press received:');
+        var button = document.getElementsByClassName('button')[0];
+        button.style.backgroundColor = 'green';
     });
     </script>
 
