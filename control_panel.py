@@ -4,7 +4,7 @@ from gpiozero import Button
 from time import sleep
 
 # Initialize the button
-button = Button(2)
+button = Button(27)
 
 # Define a global process variable to manage the subprocess
 process = None
@@ -12,13 +12,13 @@ process = None
 
 def start_process():
     global process
-    print("Start the nurse_station.py...")
-    process = subprocess.Popen(["python", "nurse_station.py"])
+    print("Start the sts.py...")
+    process = subprocess.Popen(["python", "sts.py"])
 
 
 def stop_process():
     global process
-    print("Stop the nurse_station.py...")
+    print("Stop the sts.py...")
     if process is not None:
         process.terminate()
         process = None
@@ -39,6 +39,7 @@ def manage_sts_script():
     button.wait_for_press()
     stop_process()
 
+
 # Thread for running the patient_screen.py script
 t1 = threading.Thread(target=run_patient_screen)
 
@@ -56,35 +57,26 @@ t2.start()
 # t1.join()
 # t2.join()
 
-"""
 
+"""
+from gpiozero import Button
+from time import sleep
 import subprocess
 
+process_sts = None
+process_patient_screen = None
 
-button = Button(2)
+def simple_test():
+    button = Button(27)
 
-process = None
+    button.wait_for_press()
+    process_sts = subprocess.Popen(["python", "sts.py"])
+    sleep(1)
 
+    button.wait_for_press()
+    process_sts .terminate()
 
-def start_process():
-    global process
-    print("Start the nurse_station.py...")
-    process = subprocess.Popen(["python", "nurse_station.py"])
+process_patient_screen = subprocess.Popen(["python", "patient_screen.py"])
 
-
-def stop_process():
-    global process
-    print("Stop the nurse_station.py...")
-    if process is not None:
-        process.terminate()
-        process = None
-
-
-button.wait_for_press()
-start_process()
-
-sleep(2)
-
-button.wait_for_press()
-stop_process()
+simple_test()
 """
