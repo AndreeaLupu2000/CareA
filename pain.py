@@ -21,7 +21,7 @@ RECORD_SECONDS = 5  # Record for 5 seconds
 # Windows Andreea: C:\\Users\\40732\\Downloads\\
 # Ubuntu Andreea: /home/andreea/Downloads/
 credentials = service_account.Credentials.from_service_account_file(
-    ' credentials.json'
+    'credentials.json'
 )
 
 client = speech.SpeechClient(credentials=credentials)

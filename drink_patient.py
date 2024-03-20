@@ -39,5 +39,4 @@ if __name__ == '__main__':
     app = FullScreenTextDisplay()
     app.run()
 else:
-    # Create an instance to be used when imported elsewhere
     shared_display = FullScreenTextDisplay()
