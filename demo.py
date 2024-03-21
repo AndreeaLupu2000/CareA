@@ -1,6 +1,12 @@
-from chat_patient import shared_display
-import pygame
 import time
+import threading
+import subprocess
+from gpiozero import Button
+from time import sleep
+
+
+chat_button = Button(2)
+chat_process = None
 
 def play_mp3(file_path):
     pygame.mixer.init()
@@ -9,13 +15,26 @@ def play_mp3(file_path):
     while pygame.mixer.music.get_busy():
         time.sleep(1)
 
+def run_patient_screen():
+    subprocess.run(["python3", "patient_screen.py"])
 
-display = shared_display
-time.sleep(5)
-display.update_text(f"I heard: Where is the hospital cafeteria?")
-time.sleep(2)
-display.update_text(f"Response: Exit the room to the right,\n go to the elevator and take it to the ground floor. "
-                    f"The cafeteria will be right in front of you.\n")
-play_mp3('C:\\Users\\40732\\Desktop\\Education\\Master\\WS 23-24\\Think Make Start\\CareA\\demo.mp3')
 
-time.sleep(1000)
+def run_demo_audio():
+    global chat_process
+    chat_button.wait_for_press()
+    print("Start the demo.py...")
+    chat_process = subprocess.Popen(["python", "demo_audio.py"])
+    sleep(2)
+
+    chat_button.wait_for_press()
+    print("Stop the demo.py...")
+    chat_process.kill()
+    chat_process = None
+    sleep(2)
+
+t_patient_screen = threading.Thread(target=run_patient_screen)
+t_function = threading.Thread(target=run_demo_audio)
+
+t_patient_screen.start()
+t_function.start()
+
