@@ -20,71 +20,83 @@
 <body>
     <h1>Nursing Station</h1>
     <div>
-        <button name="button1" class="button" onclick="toggleColor(this)">Patient 1</button>
-        <button class="button" onclick="toggleColor(this)">Patient 2</button>
-        <button class="button" onclick="toggleColor(this)">Patient 3</button>
-        <button class="button" onclick="toggleColor(this)">Patient 4</button>
-        <button class="button" onclick="toggleColor(this)">Patient 5</button>
+        <button id="button1" class="button" onclick="toggleColor(this)">Patient 1</button>
+        <button id="button2" class="button" onclick="toggleColor(this)">Patient 2</button>
+        <button id="button3" class="button" onclick="toggleColor(this)">Patient 3</button>
+        <button id="button4" class="button" onclick="toggleColor(this)">Patient 4</button>
+        <button id="button5" class="button" onclick="toggleColor(this)">Patient 5</button>
     </div>
 
     <div>
-        <button class="button" onclick="toggleColor(this)">Patient 6</button>
-        <button class="button" onclick="toggleColor(this)">Patient 7</button>
-        <button class="button" onclick="toggleColor(this)">Patient 8</button>
-        <button class="button" onclick="toggleColor(this)">Patient 9</button>
-        <button class="button" onclick="toggleColor(this)">Patient 10</button>
+        <button id="button6" class="button" onclick="toggleColor(this)">Patient 6</button>
+        <button id="button7" class="button" onclick="toggleColor(this)">Patient 7</button>
+        <button id="button8" class="button" onclick="toggleColor(this)">Patient 8</button>
+        <button id="button9" class="button" onclick="toggleColor(this)">Patient 9</button>
+        <button id="button10"class="button" onclick="toggleColor(this)">Patient 10</button>
     </div>
 
     <div>
-        <button class="button" onclick="toggleColor(this)">Patient 11</button>
-        <button class="button" onclick="toggleColor(this)">Patient 12</button>
-        <button class="button" onclick="toggleColor(this)">Patient 13</button>
-        <button class="button" onclick="toggleColor(this)">Patient 14</button>
-        <button class="button" onclick="toggleColor(this)">Patient 15</button>
+        <button id="button11" class="button" onclick="toggleColor(this)">Patient 11</button>
+        <button id="button12" class="button" onclick="toggleColor(this)">Patient 12</button>
+        <button id="button13" class="button" onclick="toggleColor(this)">Patient 13</button>
+        <button id="button14" class="button" onclick="toggleColor(this)">Patient 14</button>
+        <button id="button15" class="button" onclick="toggleColor(this)">Patient 15</button>
     </div>
 
     <div>
-        <button class="button" onclick="toggleColor(this)">Patient 16</button>
-        <button class="button" onclick="toggleColor(this)">Patient 17</button>
-        <button class="button" onclick="toggleColor(this)">Patient 18</button>
-        <button class="button" onclick="toggleColor(this)">Patient 19</button>
-        <button class="button" onclick="toggleColor(this)">Patient 20</button>
+        <button id="button16" class="button" onclick="toggleColor(this)">Patient 16</button>
+        <button id="button17" class="button" onclick="toggleColor(this)">Patient 17</button>
+        <button id="button18" class="button" onclick="toggleColor(this)">Patient 18</button>
+        <button id="button19" class="button" onclick="toggleColor(this)">Patient 19</button>
+        <button id="button20" class="button" onclick="toggleColor(this)">Patient 20</button>
     </div>
 
     <div>
-        <button class="button" onclick="toggleColor(this)">Patient 21</button>
-        <button class="button" onclick="toggleColor(this)">Patient 22</button>
-        <button class="button" onclick="toggleColor(this)">Patient 23</button>
-        <button class="button" onclick="toggleColor(this)">Patient 24</button>
-        <button class="button" onclick="toggleColor(this)">Patient 25</button>
+        <button id="button21" class="button" onclick="toggleColor(this)">Patient 21</button>
+        <button id="button22" class="button" onclick="toggleColor(this)">Patient 22</button>
+        <button id="button23" class="button" onclick="toggleColor(this)">Patient 23</button>
+        <button id="button24" class="button" onclick="toggleColor(this)">Patient 24</button>
+        <button id="button25" class="button" onclick="toggleColor(this)">Patient 25</button>
     </div>
 
     <div>
-        <button class="button" onclick="toggleColor(this)">Patient 26</button>
-        <button class="button" onclick="toggleColor(this)">Patient 27</button>
-        <button class="button" onclick="toggleColor(this)">Patient 28</button>
-        <button class="button" onclick="toggleColor(this)">Patient 29</button>
-        <button class="button" onclick="toggleColor(this)">Patient 30</button>
+        <button id="button26" class="button" onclick="toggleColor(this)">Patient 26</button>
+        <button id="button27" class="button" onclick="toggleColor(this)">Patient 27</button>
+        <button id="button28" class="button" onclick="toggleColor(this)">Patient 28</button>
+        <button id="button29" class="button" onclick="toggleColor(this)">Patient 29</button>
+        <button id="button30" class="button" onclick="toggleColor(this)">Patient 30</button>
     </div>
 
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
     <script>
         function toggleColor(button) {
-        button.classList.toggle('clicked');
-    }</script>
+            button.classList.toggle('clicked');
+        }
 
-    <script>
         var socket = io.connect('http://127.0.0.1:5000');
 
         socket.on('connect', function() {
-        console.log('Websocket connected!');
-    });
+            console.log('Websocket connected!');
+        });
 
-        socket.on('press', function() {
-        console.log('Button press received:');
-        var button = document.getElementsByClassName('button')[0];
-        button.style.backgroundColor = 'green';
-    });
+        socket.on('pressed', function(msg) {
+            console.log('Button press received:');
+            // Change the background color of the first button to green
+            var button = document.getElementById('button15');
+            var butt_col = {
+                'chat': 'blue',
+                'pain': 'red',
+                'drink': 'green',
+                'schedule': 'purple',
+                'orientation': 'orange'
+            };
+
+            if (button.style.backgroundColor != butt_col[msg]) {
+                button.style.backgroundColor = butt_col[msg];
+            } else {
+                button.style.backgroundColor = 'gray';
+            }
+        });
     </script>
 
    </body>
