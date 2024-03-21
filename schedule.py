@@ -153,9 +153,6 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " about today's meal, inform them: 'Dinner is scheduled to be served at 7 PM,"
                                         " featuring a nutritious meal of chicken with rice. "
                                         " We hope you find it enjoyable.'"
-                                        " Reply with: I could not hear you that well (if the question or query does not make sense) "
-                                        " You can curse at them once"
-                                        " If you don't get any prompts politely request if you can assist them with something"
                                         " For all other inquiries, offer responses that are informative, considerate,"
                                         " and in line with your programming as a supportive hospital resource."
             },
@@ -213,7 +210,7 @@ def text_to_speech(text, credentials):
 
 
 def main_sts(display):
-    # display = shared_display
+    display = shared_display
     conversation_historic = ""
 
     while True:
@@ -234,10 +231,10 @@ def main_sts(display):
 
             final_transcript = listen_print_loop(responses, display)
             time.sleep(2)
+
             display.update_text(f"I heard: \n {final_transcript}")
-            print(final_transcript)
+
             response_txt, conversation_historic = query_chatgpt(final_transcript, display, conversation_historic)
-            print(response_txt)
             display.update_text(response_txt)
 
             if response_txt:

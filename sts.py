@@ -16,7 +16,7 @@ from patient_screen import shared_display
 # Audio recording parameters
 SAMPLE_RATE = 16000
 CHUNK_SIZE = int(SAMPLE_RATE / 10)  # 100ms
-RECORD_SECONDS = 5  # Record for 5 seconds
+RECORD_SECONDS = 10  # Record for 5 seconds
 
 
 # Windows Andreea: C:\\Users\\40732\\Downloads\\

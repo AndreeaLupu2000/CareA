@@ -226,7 +226,7 @@ def text_to_speech(text, credentials):
 
 
 def main_sts(display):
-    # display = shared_display
+    display = shared_display
     conversation_historic = ""
 
     while True:

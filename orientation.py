@@ -129,7 +129,7 @@ def query_chatgpt(prompt, display, conversation_historic):
         "Content-Type": "application/json"
     }
     context = "I am currently a patient in the hospital, my name is Mary, and I am 76 years old. Having spent my " \
-            "early days as a devoted doctor, I am now retired. Presently, I am battling leukemia. Four days ago, " \
+            " early days as a devoted doctor, I am now retired. Presently, I am battling leukemia. Four days ago, " \
             "I underwent surgery and am now in the recovery phase, resting in the hospital bed. "
 
     adjusted_prompt = f"{context}{conversation_historic}"
@@ -140,22 +140,38 @@ def query_chatgpt(prompt, display, conversation_historic):
             {"role": "system", "content": " You are an informational device in a hospital,"
                                         " designed to assist patients by providing necessary information."
                                         " The answers should be really short and concrete."
+                                        "If someone inquires about the position of the cafeteria,"
+                                        " your response should be: 'The cafeteria is on the ground floor."
+                                        " From the entrance you need to go straight forward and at the first"
+                                        " corner take left. Then you will arrive to the cafeteria.’"
+                                        " If someone asks about the laboratory, you should say: "
+                                        " 'The laboratory is situated on the lower level 1."
+                                        " Keep in mind that you can bring the samples only until 12 pm into the"
+                                        " laboratory. The results are given out between 3 and 4pm.'"
+                                        " If someone wants to know where can he/she buy coffee, your inquiry should"
+                                        " consistently be: 'Every floor has a coffee automat where you can buy coffee." 
+                                        " On ground floor, 5th floor and 10th floor are barista coffee places where"
+                                        " you can be specialty coffee. The program of the places is between 7am and 7pm.'"
+                                        " When the location of the drug store is asked, just say: 'The drug story is"
+                                        " located on the ground floor. Near the Emergency Room.'"
+                                        " When the location of the Emergency Room is inquired, your response should be:"
+                                        " 'The Emergency Room is located on the West side of the building on the ground"
+                                        " floor. From the main entrance you need to go right. At the end of the hallway"
+                                        " is the Emergency Room.'"
                                         " When a patient inquires about the doctor's arrival, your response"
                                         " should consistently be: 'The doctor is currently engaged in an"
                                         " urgent surgery and is expected to complete it around 5 o'clock."
                                         " Rest assured, you are scheduled for a visit immediately afterwards.'"
                                         " When a patient inquires about the doctor's arrival, your response"
-                                        " should consistently be"
-                                        " In case of questions regarding medical"
+                                        " should consistently be: 'In case of questions regarding medical"
                                         " treatment or medication, politely clarify: 'I am programmed to provide"
                                         " general information but not specific medical advice. Would you like"
-                                        " assistance in contacting a nurse for your medical inquiries?' If asked"
-                                        " about today's meal, inform them: 'Dinner is scheduled to be served at 7 PM,"
-                                        " featuring a nutritious meal of chicken with rice. "
+                                        " assistance in contacting a nurse for your medical inquiries?'"
+                                        " If asked about today's meal, inform them: 'Dinner is scheduled to be"
+                                        " served at 7 PM, featuring a nutritious meal of chicken with rice."
                                         " We hope you find it enjoyable.'"
-                                        " Reply with: I could not hear you that well (if the question or query does not make sense) "
-                                        " You can curse at them once"
-                                        " If you don't get any prompts politely request if you can assist them with something"
+                                        " If the question or query does not make sense, you need to reply with:"
+                                        " I could not hear you that well, can you can repeat more more time."
                                         " For all other inquiries, offer responses that are informative, considerate,"
                                         " and in line with your programming as a supportive hospital resource."
             },
@@ -213,7 +229,7 @@ def text_to_speech(text, credentials):
 
 
 def main_sts(display):
-    # display = shared_display
+    display = shared_display
     conversation_historic = ""
 
     while True:

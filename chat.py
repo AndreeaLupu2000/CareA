@@ -145,16 +145,15 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " urgent surgery and is expected to complete it around 5 o'clock."
                                         " Rest assured, you are scheduled for a visit immediately afterwards.'"
                                         " When a patient inquires about the doctor's arrival, your response"
-                                        " should consistently be"
-                                        " In case of questions regarding medical"
+                                        " should consistently be: 'In case of questions regarding medical"
                                         " treatment or medication, politely clarify: 'I am programmed to provide"
                                         " general information but not specific medical advice. Would you like"
-                                        " assistance in contacting a nurse for your medical inquiries?' If asked"
-                                        " about today's meal, inform them: 'Dinner is scheduled to be served at 7 PM,"
-                                        " featuring a nutritious meal of chicken with rice. "
+                                        " assistance in contacting a nurse for your medical inquiries?'"
+                                        "If asked about today's meal, inform them: 'Dinner is scheduled to be"
+                                        " served at 7 PM, featuring a nutritious meal of chicken with rice. "
                                         " We hope you find it enjoyable.'"
-                                        " Reply with: I could not hear you that well (if the question or query does not make sense) "
-                                        " You can curse at them once"
+                                        " If the question or query does not make sense  reply with: "
+                                        " 'I could not hear you well, can you repeat the question?' "
                                         " If you don't get any prompts politely request if you can assist them with something"
                                         " For all other inquiries, offer responses that are informative, considerate,"
                                         " and in line with your programming as a supportive hospital resource."
@@ -213,7 +212,7 @@ def text_to_speech(text, credentials):
 
 
 def main_sts(display):
-    # display = shared_display
+    display = shared_display
     conversation_historic = ""
 
     while True:
