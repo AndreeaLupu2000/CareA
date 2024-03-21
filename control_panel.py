@@ -18,6 +18,7 @@ schedule_process = None
 orientation_process = None
 
 
+
 def start_drink():
     global drink_process
     while True:
@@ -32,6 +33,7 @@ def start_drink():
         sleep(2)
 
 
+
 def start_schedule():
     global schedule_process
     while True:
@@ -44,6 +46,7 @@ def start_schedule():
         schedule_process.terminate()
         schedule_process = None
         sleep(2)
+
 
 
 def start_orientation():
