@@ -1,4 +1,3 @@
-import time
 import threading
 import subprocess
 from gpiozero import Button
@@ -8,12 +7,6 @@ from time import sleep
 chat_button = Button(2)
 chat_process = None
 
-def play_mp3(file_path):
-    pygame.mixer.init()
-    pygame.mixer.music.load(file_path)
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        time.sleep(1)
 
 def run_patient_screen():
     subprocess.run(["python3", "patient_screen.py"])
