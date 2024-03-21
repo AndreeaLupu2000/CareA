@@ -93,23 +93,6 @@ def start_pain():
         pain_process = None
         sleep(2)
 
-def run_function():
-    while True:
-        try:
-            if pain_button.is_pressed:
-                start_pain()
-            elif drink_button.is_pressed:
-                start_drink()
-            elif chat_button.is_pressed:
-                start_chat()
-            elif schedule_button.is_pressed:
-                start_schedule()
-            elif orientation_button.is_pressed:
-                start_orientation()
-        except KeyboardInterrupt:
-            break
-
-
 def run_patient_screen():
     subprocess.run(["python3", "patient_screen.py"])
 
@@ -133,7 +116,7 @@ def run_nurse_station():
 
 
     while True:
-        try:
+        #try:
             if chat_button.is_pressed:
                 print("Chat button pressed")
                 sleep(3)  # Simulate delay
@@ -154,8 +137,8 @@ def run_nurse_station():
                 print("Orientation button pressed")
                 sleep(3)  # Simulate delay
                 socketio.emit('pressed', 'orientation', namespace='/')
-        except KeyboardInterrupt:
-            break
+        #except KeyboardInterrupt:
+        #    break
 
 
 # Thread for running the patient_screen.py script
