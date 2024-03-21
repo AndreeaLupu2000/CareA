@@ -2,6 +2,9 @@ import threading
 import subprocess
 from gpiozero import Button
 from time import sleep
+from flask import Flask, render_template
+from flask_socketio import SocketIO, emit
+
 
 # Initialize the button
 pain_button = Button(27)
@@ -111,26 +114,64 @@ def run_patient_screen():
     subprocess.run(["python3", "patient_screen.py"])
 
 
+app = Flask(__name__)
+socketio = SocketIO(app, logger=True, engineio_logger=True)
+
+
+@app.route('/')
+def index():
+    return render_template('ns-interface.html')
+
+
+
 def run_nurse_station():
-    subprocess.run(["python3", "ns-backend.py"])
+    global chat_button
+    global pain_button
+    global drink_button
+    global schedule_button
+    global orientation_button
+
+
+    while True:
+        try:
+            if chat_button.is_pressed:
+                print("Chat button pressed")
+                sleep(3)  # Simulate delay
+                socketio.emit('pressed', 'chat', namespace='/')
+            elif pain_button.is_pressed:
+                print("Pain button pressed")
+                sleep(3)  # Simulate delay
+                socketio.emit('pressed', 'pain', namespace='/')
+            elif drink_button.is_pressed:
+                print("Drink button pressed")
+                sleep(3)  # Simulate delay
+                socketio.emit('pressed', 'drink', namespace='/')
+            elif schedule_button.is_pressed:
+                print("Schedule button pressed")
+                sleep(3)  # Simulate delay
+                socketio.emit('pressed', 'schedule', namespace='/')
+            elif orientation_button.is_pressed:
+                print("Orientation button pressed")
+                sleep(3)  # Simulate delay
+                socketio.emit('pressed', 'orientation', namespace='/')
+        except KeyboardInterrupt:
+            break
 
 
 # Thread for running the patient_screen.py script
 t_patient_screen = threading.Thread(target=run_patient_screen)
 t_nurse_station = threading.Thread(target=run_nurse_station)
-#t_function = threading.Thread(target=run_function)
-
 t_chat = threading.Thread(target=start_chat)
 t_pain = threading.Thread(target=start_pain)
 t_drink = threading.Thread(target=start_drink)
 t_schedule = threading.Thread(target=start_schedule)
 t_orientation = threading.Thread(target=start_orientation)
 
+socketio.run(app, host='10.183.71.160', port=5000, debug=False, allow_unsafe_werkzeug=True)
+
 # Start the patient_screen.py script thread
 t_patient_screen.start()
 t_nurse_station.start()
-#t_function.start()
-
 t_chat.start()
 t_pain.start()
 t_drink.start()

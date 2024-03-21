@@ -42,4 +42,3 @@ text_to_speech_save(f"I heard: Where is the hospital cafeteria?", "demo_question
 # Usage example
 text_to_speech_save(f"Exit the room to the right, go to the elevator and take it to the ground floor. "
                     f"The cafeteria will be right infront of you.",  "demo.mp3")
-

@@ -59,13 +59,6 @@
         <button id="button25" class="button" onclick="toggleColor(this)">Patient 25</button>
     </div>
 
-    <div>
-        <button id="button26" class="button" onclick="toggleColor(this)">Patient 26</button>
-        <button id="button27" class="button" onclick="toggleColor(this)">Patient 27</button>
-        <button id="button28" class="button" onclick="toggleColor(this)">Patient 28</button>
-        <button id="button29" class="button" onclick="toggleColor(this)">Patient 29</button>
-        <button id="button30" class="button" onclick="toggleColor(this)">Patient 30</button>
-    </div>
 
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
     <script>
@@ -73,7 +66,7 @@
             button.classList.toggle('clicked');
         }
 
-        var socket = io.connect('http://127.0.0.1:5000');
+        var socket = io.connect('http://10.183.71.160:5000');
 
         socket.on('connect', function() {
             console.log('Websocket connected!');
@@ -82,13 +75,13 @@
         socket.on('pressed', function(msg) {
             console.log('Button press received:');
             // Change the background color of the first button to green
-            var button = document.getElementById('button15');
+            var button = document.getElementById('button13');
             var butt_col = {
-                'chat': 'blue',
-                'pain': 'red',
-                'drink': 'green',
-                'schedule': 'purple',
-                'orientation': 'orange'
+                'chat': 'green',
+                'pain': 'orange',
+                'drink': 'blue',
+                'schedule': 'yellow',
+                'orientation': 'purple'
             };
 
             if (button.style.backgroundColor != butt_col[msg]) {
