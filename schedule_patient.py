@@ -6,7 +6,7 @@ class FullScreenTextDisplay:
     def __init__(self):
         self.root = tk.Tk()
         self.root.configure(bg='yellow')
-        self.root.attributes('-fullscreen', True)
+        #self.root.attributes('-fullscreen', True)
 
         # Calculate window size and position (1/4 of the screen size)
         #screen_width = self.root.winfo_screenwidth()

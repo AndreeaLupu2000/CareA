@@ -6,7 +6,7 @@ class FullScreenTextDisplay:
     def __init__(self):
         self.root = tk.Tk()
         self.root.configure(bg='purple')
-        self.root.attributes('-fullscreen', True)
+        #self.root.attributes('-fullscreen', True)
 
         # Calculate window size and position (1/4 of the screen size)
         #screen_width = self.root.winfo_screenwidth()
@@ -18,6 +18,7 @@ class FullScreenTextDisplay:
 
         # Set window size and position
         #self.root.geometry(f"{window_width}x{window_height}+{position_right}+{position_down}")
+        self.root.geometry(f"1030x610+0+0")
 
         # Set up the text font and size
         self.text_font = tkfont.Font(size=25)
