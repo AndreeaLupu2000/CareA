@@ -7,20 +7,22 @@ class FullScreenTextDisplay:
         self.root = tk.Tk()
         self.root.configure(bg='green')
 
+        self.root.attributes('-fullscreen', True)
+
         # Calculate window size and position (1/4 of the screen size)
-        screen_width = self.root.winfo_screenwidth()
-        screen_height = self.root.winfo_screenheight()
-        window_width = screen_width // 2
-        window_height = screen_height // 2
-        position_right = screen_width // 4
-        position_down = screen_height // 4
+        #screen_width = self.root.winfo_screenwidth()
+        #screen_height = self.root.winfo_screenheight()
+        #window_width = screen_width // 2
+        #window_height = screen_height // 2
+        #position_right = screen_width // 4
+        #position_down = screen_height // 4
 
         # Set window size and position
-        self.root.geometry(f"{window_width}x{window_height}+{position_right}+{position_down}")
+        #self.root.geometry(f"{window_width}x{window_height}+{position_right}+{position_down}")
 
         # Set up the text font and size
         self.text_font = tkfont.Font(size=25)
-        self.label = tk.Label(self.root, font=self.text_font, fg='white', bg='green', wraplength=window_width,
+        self.label = tk.Label(self.root, font=self.text_font, fg='white', bg='green', #wraplength=window_width,
                               justify="center")
         self.label.pack(expand=True)
 

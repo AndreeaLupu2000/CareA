@@ -144,19 +144,24 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " should consistently be: 'The doctor is currently engaged in an"
                                         " urgent surgery and is expected to complete it around 5 o'clock."
                                         " Rest assured, you are scheduled for a visit immediately afterwards.'"
-                                        " When a patient inquires about the doctor's arrival, your response"
-                                        " should consistently be: 'In case of questions regarding medical"
-                                        " treatment or medication, politely clarify: 'I am programmed to provide"
+                                        " In case of questions regarding medical treatment or medication,"
+                                        " politely clarify: 'I am programmed to provide"
                                         " general information but not specific medical advice. Would you like"
                                         " assistance in contacting a nurse for your medical inquiries?'"
-                                        "If asked about today's meal, inform them: 'Dinner is scheduled to be"
+                                        " If asked about today's meal, inform them: 'Dinner is scheduled to be"
                                         " served at 7 PM, featuring a nutritious meal of chicken with rice. "
                                         " We hope you find it enjoyable.'"
                                         " If the question or query does not make sense  reply with: "
                                         " 'I could not hear you well, can you repeat the question?' "
-                                        " If you don't get any prompts politely request if you can assist them with something"
+                                        " We someone asked you what day today is, your response should be: "
+                                        "'Today is the 22nd of March.' "
+                                        " If someone tells you he is feeling lonely and he/she just wants to talk, "
+                                        " your response should consistently be: ' I am glad that you came to me for"
+                                        " comfort, let's talk for a while. Tell me something about you.' Continue talking"
+                                          "about things that can increase the happiness in people."
                                         " For all other inquiries, offer responses that are informative, considerate,"
-                                        " and in line with your programming as a supportive hospital resource."
+                                        " and in line with your programming as a supportive hospital resource and an advanced "
+                                        " AI system."
             },
 
             {"role": "user", "content": adjusted_prompt}
@@ -211,7 +216,7 @@ def text_to_speech(text, credentials):
     play(audio_segment)
 
 
-def main_sts(display):
+def main_sts():
     display = shared_display
     conversation_historic = ""
 
@@ -244,4 +249,4 @@ def main_sts(display):
 
 
 if __name__ == '__main__':
-    main_sts(shared_display)
+    main_sts()

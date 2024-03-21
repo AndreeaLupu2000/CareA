@@ -140,7 +140,7 @@ def query_chatgpt(prompt, display, conversation_historic):
             {"role": "system", "content": " You are an informational device in a hospital,"
                                         " designed to assist patients by providing necessary information."
                                         " The answers should be really short and concrete."
-                                        "If someone inquires about the position of the cafeteria,"
+                                        " If someone inquires about the position of the cafeteria,"
                                         " your response should be: 'The cafeteria is on the ground floor."
                                         " From the entrance you need to go straight forward and at the first"
                                         " corner take left. Then you will arrive to the cafeteria.’"
@@ -158,20 +158,19 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " 'The Emergency Room is located on the West side of the building on the ground"
                                         " floor. From the main entrance you need to go right. At the end of the hallway"
                                         " is the Emergency Room.'"
-                                        " When a patient inquires about the doctor's arrival, your response"
+                                         " When a patient inquires about the doctor's arrival, your response"
                                         " should consistently be: 'The doctor is currently engaged in an"
                                         " urgent surgery and is expected to complete it around 5 o'clock."
                                         " Rest assured, you are scheduled for a visit immediately afterwards.'"
-                                        " When a patient inquires about the doctor's arrival, your response"
-                                        " should consistently be: 'In case of questions regarding medical"
-                                        " treatment or medication, politely clarify: 'I am programmed to provide"
+                                        " In case of questions regarding medical treatment or medication,"
+                                        " politely clarify: 'I am programmed to provide"
                                         " general information but not specific medical advice. Would you like"
                                         " assistance in contacting a nurse for your medical inquiries?'"
                                         " If asked about today's meal, inform them: 'Dinner is scheduled to be"
-                                        " served at 7 PM, featuring a nutritious meal of chicken with rice."
+                                        " served at 7 PM, featuring a nutritious meal of chicken with rice. "
                                         " We hope you find it enjoyable.'"
-                                        " If the question or query does not make sense, you need to reply with:"
-                                        " I could not hear you that well, can you can repeat more more time."
+                                        " If the question or query does not make sense  reply with: "
+                                        " 'I could not hear you well, can you repeat the question?' "
                                         " For all other inquiries, offer responses that are informative, considerate,"
                                         " and in line with your programming as a supportive hospital resource."
             },
@@ -228,7 +227,7 @@ def text_to_speech(text, credentials):
     play(audio_segment)
 
 
-def main_sts(display):
+def main_sts():
     display = shared_display
     conversation_historic = ""
 
@@ -261,4 +260,4 @@ def main_sts(display):
 
 
 if __name__ == '__main__':
-    main_sts(shared_display)
+    main_sts()

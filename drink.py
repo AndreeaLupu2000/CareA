@@ -129,8 +129,8 @@ def query_chatgpt(prompt, display, conversation_historic):
         "Content-Type": "application/json"
     }
     context = "I am currently a patient in the hospital, my name is Mary, and I am 76 years old. Having spent my " \
-            "early days as a devoted doctor, I am now retired. Presently, I am battling leukemia. Four days ago, " \
-            "I underwent surgery and am now in the recovery phase, resting in the hospital bed. "
+            " early days as a devoted doctor, I am now retired. Presently, I am battling leukemia. Four days ago, " \
+            " I underwent surgery and am now in the recovery phase, resting in the hospital bed. "
 
     adjusted_prompt = f"{context}{conversation_historic}"
 
@@ -144,7 +144,7 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " When a person says that is turst or that he/she would like to drink something,"
                                         " your response should consistently be: 'I will call a nurse to bring your drink.'"
                                         " When a patient inquires about what should he drink, your response"
-                                        " should consistently be: 'People usually drink water, herbal teas,"
+                                        " should consistently be: 'Patients usually drink water, herbal teas,"
                                         " juices, and sometimes broth. These are chosen to keep patients "
                                         " hydrated and support overall health.'"
                                         " When ask about a recommendation of a drink, your response should"
@@ -153,7 +153,7 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " waste. It's crucial for overall health. I would definitely would"
                                         " recommend water.'"
                                         " If someone would like to drink something with caffeine, your response"
-                                        "should be: 'Caffeine is often not recommended because it"
+                                        " should be: 'Caffeine is often not recommended because it"
                                         " can lead to dehydration, disrupt sleep patterns, increase"
                                         " heart rate, and elevate blood pressure, which might be concerning"
                                         " for hospital patients or those with certain health conditions."
@@ -165,10 +165,19 @@ def query_chatgpt(prompt, display, conversation_historic):
                                         " your response should be: 'The hospital menus typically include a "
                                         " variety of balanced meals to accommodate different dietary needs. "
                                         " Options often feature soups, salads, vegetables, lean proteins, and starches.'"
-                                        " In case of questions regarding medical"
-                                        " treatment or medication, politely clarify: 'I am programmed to provide"
+                                        " When a patient inquires about the doctor's arrival, your response"
+                                        " should consistently be: 'The doctor is currently engaged in an"
+                                        " urgent surgery and is expected to complete it around 5 o'clock."
+                                        " Rest assured, you are scheduled for a visit immediately afterwards.'"
+                                        " In case of questions regarding medical treatment or medication,"
+                                        " politely clarify: 'I am programmed to provide"
                                         " general information but not specific medical advice. Would you like"
                                         " assistance in contacting a nurse for your medical inquiries?'"
+                                        " If asked about today's meal, inform them: 'Dinner is scheduled to be"
+                                        " served at 7 PM, featuring a nutritious meal of chicken with rice. "
+                                        " We hope you find it enjoyable.'"
+                                        " If the question or query does not make sense  reply with: "
+                                        " 'I could not hear you well, can you repeat the question?' "
                                         " For all other inquiries, offer responses that are informative, considerate,"
                                         " and in line with your programming as a supportive hospital resource."
             },
@@ -225,7 +234,7 @@ def text_to_speech(text, credentials):
     play(audio_segment)
 
 
-def main_sts(display):
+def main_sts():
     display = shared_display
     conversation_historic = ""
 
@@ -258,4 +267,4 @@ def main_sts(display):
 
 
 if __name__ == '__main__':
-    main_sts(shared_display)
+    main_sts()
